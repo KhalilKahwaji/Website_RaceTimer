@@ -1,3 +1,8 @@
+body {
+  margin: 0; /* Reset default body margin */
+}
+
+
 .navbar {
     background: #009185;
     height: 80px;

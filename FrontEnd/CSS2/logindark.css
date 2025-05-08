@@ -11,9 +11,9 @@ html {
     width: 400px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: rgb(201, 181, 1);
+    background: rgb(20, 1, 92);
     box-sizing: border-box;
-    box-shadow: 0 15px 25px rgb(241, 230, 127);
+    box-shadow: 0 10px 20px rgb(33, 1, 121);
     border-radius: 10px;
     display: flex; 
     flex-direction: column; 
