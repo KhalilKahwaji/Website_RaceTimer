@@ -6,6 +6,33 @@
     <title> Timer </title>
     <link rel="stylesheet" href="CSS/timer.css">
     <script src="JS/timer.js" defer></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const stored = localStorage.getItem("offline_laps");
+
+    if (stored) {
+        try {
+            const data = JSON.parse(stored);
+            if (Array.isArray(data.laps) && data.laps.length > 0) {
+                const shouldClear = confirm(
+                    "Offline laps found for event: " + data.event_id + 
+                    ".\nDo you want to clear them?"
+                );
+                if (shouldClear) {
+                    localStorage.removeItem("offline_laps");
+                    alert("Offline laps cleared.");
+                } else {
+                    alert("Offline laps preserved.");
+                }
+            }
+        } catch (e) {
+            console.warn("Malformed localStorage data:", e.message);
+        }
+    }
+});
+</script>
+
 </head>
 
 <body>
@@ -16,7 +43,8 @@
     <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
     <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
     <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
-    <a href="#" class="button" onClick="stopwatch.sendLapsToBackend();">Send Laps</a>
+    <a href="#" class="button" onClick="stopwatch.handleLapsSubmission();">Send Laps</a>
+
 
 
 </nav>
