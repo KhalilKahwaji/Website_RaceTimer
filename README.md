@@ -27,3 +27,4 @@ server running at http://localhost:8080
 
 open http://localhost:8080/raceTimer.html
 
+.

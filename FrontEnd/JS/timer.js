@@ -69,10 +69,10 @@ getLaps() {
         })
     }).then(res => {
         if (!res.ok) throw new Error("Failed to send laps");
-        alert("✅ Laps sent successfully!");
+        alert("Laps sent successfully!");
     }).catch(err => {
-        console.error("❌ Error sending laps:", err);
-        alert("❌ Failed to send laps.");
+        console.error("Error sending laps:", err);
+        alert("Failed to send laps.");
     });
 }
 
