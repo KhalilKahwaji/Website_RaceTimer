@@ -57,6 +57,24 @@ sendLapsToBackend() {
     });
 }
 
+getLaps() {
+   
+
+    fetch('/api/lap', {
+        method: 'Get',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            event_id: event_id.trim(),
+            laps: times
+        })
+    }).then(res => {
+        if (!res.ok) throw new Error("Failed to send laps");
+        alert("✅ Laps sent successfully!");
+    }).catch(err => {
+        console.error("❌ Error sending laps:", err);
+        alert("❌ Failed to send laps.");
+    });
+}
 
 
     stop() {

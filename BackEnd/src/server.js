@@ -60,7 +60,7 @@ app.get('/api/lap', (req, res) => {
     });
 });
 
-// GET /api/lap/:event_id — get laps by event ID
+// GET /api/lap/:event_id — get slaps by event ID
 app.get('/api/lap/:event_id', (req, res) => {
   const eventId = req.params.event_id;
 
