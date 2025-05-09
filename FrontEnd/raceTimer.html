@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Timer </title>
     <link rel="stylesheet" href="CSS/timer.css">
+    <link rel="stylesheet" href="CSS/customAlert.css">
+
+    <script src="JS/customAlert.js" defer></script>
     <script src="JS/timer.js" defer></script>
+
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
@@ -14,16 +18,33 @@ window.addEventListener('DOMContentLoaded', () => {
     if (stored) {
         try {
             const data = JSON.parse(stored);
-            if (Array.isArray(data.laps) && data.laps.length > 0) {
+            if (data && Array.isArray(data.laps) && data.laps.length > 0) {
                 const shouldClear = confirm(
-                    "Offline laps found for event: " + data.event_id + 
+                    "Offline laps found for event: " + data.event_id +
                     ".\nDo you want to clear them?"
                 );
+
                 if (shouldClear) {
                     localStorage.removeItem("offline_laps");
                     alert("Offline laps cleared.");
                 } else {
-                    alert("Offline laps preserved.");
+                    //alert("Offline laps preserved.");
+
+                    const ul = document.querySelector('ul.results');
+                    if (ul) {
+                        data.laps.forEach(lap => {
+                            const li = document.createElement('li');
+                            li.textContent = lap;
+                            ul.appendChild(li);
+                        });
+                    } else {
+                        console.error("UL element not found.");
+                    }
+
+                    // Optional: sync with stopwatch.laps if needed
+                    if (typeof stopwatch !== 'undefined' && stopwatch.laps) {
+                        stopwatch.laps = data.laps.slice(); // make a copy
+                    }
                 }
             }
         } catch (e) {
@@ -33,10 +54,17 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
 </head>
 
 <body>
 
+    <div id="custom-alert" class="alert-hidden">
+        <div id="custom-alert-box">
+            <p id="custom-alert-message"></p>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
 <nav class="controls">
     <a href="#" class="button" onClick="stopwatch.start();">Start</a>
     <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
@@ -45,10 +73,11 @@ window.addEventListener('DOMContentLoaded', () => {
     <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
     <a href="#" class="button" onClick="stopwatch.handleLapsSubmission();">Send Laps</a>
 
-
-
 </nav>
 <div class="stopwatch"></div>
-<ul class="results"></ul>
+
+<div class="laps-scroll-container">
+  <ul class="results"></ul>
+</div>
 </body>
 </html>

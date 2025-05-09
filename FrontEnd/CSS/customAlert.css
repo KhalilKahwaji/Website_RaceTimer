@@ -1,0 +1,32 @@
+#custom-alert {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#custom-alert-box {
+  background: #101820FF;
+  color: #bbb;
+  padding: 1.5em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
+  max-width: 90%;
+  text-align: center;
+}
+
+#custom-alert button {
+  margin-top: 1em;
+  background: #bbb;
+  color: #101820FF;
+  padding: 0.5em 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.alert-hidden {
+  display: none !important;
+}
