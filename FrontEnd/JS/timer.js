@@ -27,6 +27,38 @@ class Stopwatch {
         this.results.appendChild(li);
     }
     
+sendLapsToBackend() {
+    const times = Array.from(this.results.children).map(li => li.innerText);
+
+    if (times.length === 0) {
+        alert("No laps to send.");
+        return;
+    }
+
+    const event_id = prompt("Enter Event ID:");
+    if (!event_id || event_id.trim() === "") {
+        alert("Event ID is required.");
+        return;
+    }
+
+    fetch('/api/lap/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            event_id: event_id.trim(),
+            laps: times
+        })
+    }).then(res => {
+        if (!res.ok) throw new Error("Failed to send laps");
+        alert("✅ Laps sent successfully!");
+    }).catch(err => {
+        console.error("❌ Error sending laps:", err);
+        alert("❌ Failed to send laps.");
+    });
+}
+
+
+
     stop() {
         this.running = false;
         this.time = null;
