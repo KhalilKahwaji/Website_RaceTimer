@@ -11,9 +11,9 @@ html {
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgb(180, 0, 180);
+  background: rgb(214, 143, 49);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgb(145, 53, 122);
+  box-shadow: 0 10px 20px rgb(124, 67, 1);
   border-radius: 10px;
   display: flex; 
   flex-direction: column; 
@@ -23,6 +23,12 @@ html {
 .login-box h2 {
   margin: 0 0 30px;
   padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box p {
+  
   color: #fff;
   text-align: center;
 }
@@ -98,8 +104,13 @@ html {
 }
 
 .logbutton:hover {
-  background: #ff9e58;
+  background: rgb(248, 211, 154);
   transition: all 0.3s ease;
   color: black; /* Ensure hover text is also black if desired */
+}
+
+.log__links {
+  color: #101820FF;
+
 }
 

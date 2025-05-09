@@ -4,7 +4,7 @@ body {
 
 
 .navbar {
-    background: #009185;
+    background: #101820FF;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -92,12 +92,12 @@ body {
   }
   
   .button:hover {
-    background: #ff9e58;
+    background: rgb(248, 211, 154);
     transition: all 0.3s ease;
   }
   
   .navbar__links:hover {
-    color: #ff9e58;
+    color: rgb(248, 211, 154);
     transition: all 0.3s ease;
   }
   
