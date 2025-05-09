@@ -58,26 +58,39 @@ window.addEventListener('DOMContentLoaded', () => {
 </head>
 
 <body>
-
     <div id="custom-alert" class="alert-hidden">
         <div id="custom-alert-box">
             <p id="custom-alert-message"></p>
             <button onclick="closeCustomAlert()">OK</button>
         </div>
     </div>
-<nav class="controls">
-    <a href="#" class="button" onClick="stopwatch.start();">Start</a>
-    <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
-    <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
-    <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
-    <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
-    <a href="#" class="button" onClick="stopwatch.handleLapsSubmission();">Send Laps</a>
+    <nav class="navbar">
+        <div class="navbar-title"> <h1>Race Timer</h1> </div>
+        <div class="navbar-buttons">
+        <div class="nav-item btn-2" style="background-color: #37941a;">
+            <a href="#" class="button" onClick="stopwatch.start();">Start</a>
+        </div>
+        <div class="nav-item btn-2" style="background-color: #bdb224;">
+            <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
+        </div>
+        <div class="nav-item btn-2" style="background-color: #c72917;">
+            <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
+        </div>
+        <div class="nav-item btn-2" style="background-color: #1f16a7;">
+            <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
+        </div>
+        <div class="nav-item btn-2" style="background-color: #4b3a1c;">
+            <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a>
+        </div>
+        <div class="nav-item btn-2" style="background-color: #7813a7;">
+            <a href="#" class="button" onClick="stopwatch.handleLapsSubmission();">Send Laps</a>
+        </div>
+    </div>
+    </nav>
+    <div class="stopwatch"></div>
 
-</nav>
-<div class="stopwatch"></div>
-
-<div class="laps-scroll-container">
-  <ul class="results"></ul>
-</div>
+    <div class="laps-scroll-container">
+        <ul class="results"></ul>
+    </div>
 </body>
 </html>
