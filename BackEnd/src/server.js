@@ -77,3 +77,4 @@ app.get('/api/lap/:event_id', (req, res) => {
     res.json(rows);
   });
 });
+

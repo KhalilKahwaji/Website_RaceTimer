@@ -27,11 +27,12 @@ class Stopwatch {
         this.results.appendChild(li);
     }
     
-sendLapsToBackend() {
+//either save as csv or send to backend
+handleLapsSubmission() {
     const times = Array.from(this.results.children).map(li => li.innerText);
 
     if (times.length === 0) {
-        alert("No laps to send.");
+        alert("No laps to submit.");
         return;
     }
 
@@ -41,20 +42,57 @@ sendLapsToBackend() {
         return;
     }
 
+    const action = confirm("Do you want to send the laps to the server?\nPress Cancel to download them as CSV instead.");
+
+    if (action) {
+        this.sendLapsToBackend(event_id.trim(), times);
+    } else {
+        this.downloadLapsAsCSV(event_id.trim(), times);
+    }
+}
+
+sendLapsToBackend(event_id, laps) {
+    const payload = {
+        event_id,
+        laps
+    };
+
+    if (!navigator.onLine) {
+        localStorage.setItem("offline_laps", JSON.stringify(payload));
+        alert("You are offline. Laps saved in localStorage.");
+        return;
+    }
+
     fetch('/api/lap/bulk', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            event_id: event_id.trim(),
-            laps: times
-        })
+        body: JSON.stringify(payload)
     }).then(res => {
         if (!res.ok) throw new Error("Failed to send laps");
-        alert("✅ Laps sent successfully!");
+        alert("Laps sent successfully.");
+        localStorage.removeItem("offline_laps");
     }).catch(err => {
-        console.error("❌ Error sending laps:", err);
-        alert("❌ Failed to send laps.");
+        console.error("Error sending laps:", err);
+        alert("Failed to send laps.");
     });
+}
+
+
+downloadLapsAsCSV(event_id, laps) {
+    const header = "Event ID,Lap Time\n";
+    const rows = laps.map(lap => `${event_id},${lap}`).join("\n");
+    const content = header + rows;
+
+    const blob = new Blob([content], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${event_id}_laps.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 getLaps() {
