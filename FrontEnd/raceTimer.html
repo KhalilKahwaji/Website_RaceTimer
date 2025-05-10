@@ -9,51 +9,7 @@
 
     <script src="JS/customAlert.js" defer></script>
     <script src="JS/timer.js" defer></script>
-
-
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-    const stored = localStorage.getItem("offline_laps");
-
-    if (stored) {
-        try {
-            const data = JSON.parse(stored);
-            if (data && Array.isArray(data.laps) && data.laps.length > 0) {
-                const shouldClear = confirm(
-                    "Offline laps found for event: " + data.event_id +
-                    ".\nDo you want to clear them?"
-                );
-
-                if (shouldClear) {
-                    localStorage.removeItem("offline_laps");
-                    alert("Offline laps cleared.");
-                } else {
-                    //alert("Offline laps preserved.");
-
-                    const ul = document.querySelector('ul.results');
-                    if (ul) {
-                        data.laps.forEach(lap => {
-                            const li = document.createElement('li');
-                            li.textContent = lap;
-                            ul.appendChild(li);
-                        });
-                    } else {
-                        console.error("UL element not found.");
-                    }
-
-                    // Optional: sync with stopwatch.laps if needed
-                    if (typeof stopwatch !== 'undefined' && stopwatch.laps) {
-                        stopwatch.laps = data.laps.slice(); // make a copy
-                    }
-                }
-            }
-        } catch (e) {
-            console.warn("Malformed localStorage data:", e.message);
-        }
-    }
-});
-</script>
-
+    <script src="JS/customInit.js" defer></script>
 
 </head>
 
@@ -64,6 +20,17 @@ window.addEventListener('DOMContentLoaded', () => {
             <button onclick="closeCustomAlert()">OK</button>
         </div>
     </div>
+
+    <div id="custom-confirm" class="alert-hidden">
+        <div id="custom-confirm-box">
+            <p id="custom-confirm-message"></p>
+            <div class="confirm-buttons">
+            <button id="confirm-yes" style="background-color: #bbb; color:101820FF;">Send to Server</button>
+            <button id="confirm-no" style="background-color: #bbb; color:101820FF;" >Download CSV</button>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="navbar-title"> <h1>Race Timer</h1> </div>
         <div class="navbar-buttons">

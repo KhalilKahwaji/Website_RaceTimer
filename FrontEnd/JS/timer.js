@@ -46,26 +46,41 @@ handleLapsSubmission() {
         return;
     }
 
-    const action = confirm("Do you want to send the laps to the server?\nPress Cancel to download them as CSV instead.");
+    const self = this; // save reference to Stopwatch
+    const id = event_id.trim();
 
-    if (action) {
-        this.sendLapsToBackend(event_id.trim(), times);
-    } else {
-        this.downloadLapsAsCSV(event_id.trim(), times);
+    const payload = {
+        event_id: id,
+        laps: times
+    };
+    if(!payload.event_id || payload.laps.length === 0) {
+        alert("Event ID and laps are required.");
     }
+        if (!navigator.onLine) {
+            localStorage.setItem("offline_laps", JSON.stringify(payload));
+            alert("You are offline. Laps saved in localStorage.");
+            return;
+        }
+
+    customConfirm(
+    "Do you want to send the laps to the server?\nPress Cancel to download them as CSV instead.",
+    "Send to Server",
+    "Download CSV"
+    ).then(action => {
+    if (action) {
+        self.sendLapsToBackend(event_id.trim(), times);
+    } else {
+        self.downloadLapsAsCSV(event_id.trim(), times);
+    }
+    });
 }
+
 
 sendLapsToBackend(event_id, laps) {
     const payload = {
         event_id,
         laps
     };
-
-    if (!navigator.onLine) {
-        localStorage.setItem("offline_laps", JSON.stringify(payload));
-        alert("You are offline. Laps saved in localStorage.");
-        return;
-    }
 
     fetch('/api/lap/bulk', {
         method: 'POST',
