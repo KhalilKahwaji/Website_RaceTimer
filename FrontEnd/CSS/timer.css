@@ -58,21 +58,22 @@ html {
 }
 
 .stopwatch {
-  font-size: 20vw;
-  height: 80%;
+  font-size: 14vw;
+  height: 70%;
   line-height: 100vh;
   text-align: center;
 }
 
 
 .laps-scroll-container {
+
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid #ffffff;
   padding: 0.5em;
   margin: 1em auto;
   width: 68%;
-  background: rgb(214, 143, 49);
+  background: #101820FF;
   border-radius: 8px;
 }
 
@@ -85,7 +86,7 @@ html {
 .results li {
   padding: 0.3em 0;
   border-bottom: 1px solid #ffffff;
-  color: #101820FF;
+  color: rgb(255, 255, 255);
 }
 
 
