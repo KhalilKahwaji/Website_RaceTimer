@@ -31,7 +31,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (typeof stopwatch !== 'undefined' && stopwatch.laps) {
               stopwatch.laps = data.laps.slice();
-            }
+              const lastLap = data.laps[data.laps.length - 1];
+            if (lastLap) {
+            const [h, m, s, cs] = lastLap.split(':').map(str => parseInt(str));
+            stopwatch.times = [h, m, s, cs];
+            stopwatch.print(); // ✅ Update display
+                    }
+                }
           }
         });
       }
