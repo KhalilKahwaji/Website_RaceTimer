@@ -39,13 +39,19 @@ app.post('/api/lap/bulk', (req, res) => {
 
   const stmt = db.prepare("INSERT INTO laps (event_id, time) VALUES (?, ?)");
 
-  db.serialize(() => {
+db.serialize(() => {
+  db.run(`DELETE FROM laps WHERE event_id = ?`, [event_id], function (err) {
+    if (err) return res.status(500).send("Failed to delete existing laps: " + err.message);
+
+    const stmt = db.prepare("INSERT INTO laps (event_id, time) VALUES (?, ?)");
     laps.forEach(time => {
       stmt.run(event_id, time);
     });
     stmt.finalize();
-    res.status(201).json({ message: "Laps saved." });
+
+    res.status(201).json({ message: `Laps for event ${event_id} replaced.` });
   });
+});
 });
 
 

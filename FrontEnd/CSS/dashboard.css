@@ -1,0 +1,59 @@
+
+#resultsBox {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+}
+
+
+main {
+  position: absolute;   
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  font-size: 1.5em;
+  color: black;
+}
+h2 {
+   font-size: 2em;
+    color: white
+}
+
+a {
+  text-decoration: none;       /* removes underline */
+  color: inherit;              /* keeps text color same as parent */
+}
+
+a:visited,
+a:active,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.laps-scroll-container-dashboard {
+
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ffffff;
+  padding: 0.5em;
+  margin: 1em auto;
+  width: 68%;
+  background: #101820FF;
+  border-radius: 8px;
+}
+
+.results-dashboard {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.results-dashboard li {
+  padding: 0.3em 0;
+  border-bottom: 1px solid #ffffff;
+  color: rgb(255, 255, 255);
+}

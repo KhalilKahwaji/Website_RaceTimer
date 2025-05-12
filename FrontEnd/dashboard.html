@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dashboard </title>
+    <link rel="icon" href="images/timer.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/timer.css">
+    <link rel="stylesheet" href="CSS/customAlert.css">
+
+    <script src="JS/customAlert.js" defer></script>
+    <script src="JS/timer.js" defer></script>
+    <script src="JS/customInit.js" defer></script>
+
+    <link rel="stylesheet" href="CSS/dashboard.css"/>
+
+    <script src="JS/dashboard.js" defer></script>
+
+</head>
+
+<body>
+    <div id="custom-alert" class="alert-hidden">
+        <div id="custom-alert-box">
+            <p id="custom-alert-message"></p>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
+
+    <div id="custom-confirm" class="alert-hidden">
+        <div id="custom-confirm-box">
+            <p id="custom-confirm-message"></p>
+            <div class="confirm-buttons">
+            <button id="confirm-yes" style="background-color: #bbb; color:101820FF;">Send to Server</button>
+            <button id="confirm-no" style="background-color: #bbb; color:101820FF;" >Download CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar" position="fixed">
+        <div class="navbar-title"> <a href="raceTimer.html"><h1>Race Timer</h1></a> </div>
+        <div class="navbar-buttons">
+        <div class="nav-item btn-2" style="background-color: #dec801;">
+            <a href="#" class="button" onClick="getAllLaps();">Get all laps</a>
+        </div>
+        
+        <div class="nav-item btn-2" style="background-color: #17a2b8;"> 
+            <a href="#" class="button" onClick="getLapsByRace();">Get laps of race: </a>
+        </div>
+        <input type="text" id="raceIdInput" placeholder="Enter Race ID" />
+
+    </div>
+    </nav>
+
+    <main class="laps-scroll-container-dashboard">
+        <pre id="resultsBox">Waiting for data...</pre>
+    </main>
+</body>
+</html>
