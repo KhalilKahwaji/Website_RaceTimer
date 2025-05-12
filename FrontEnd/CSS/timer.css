@@ -105,7 +105,7 @@ html {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #ffe600; /* Blue */
+  background-color: #ffe600;
   color: #101820FF;
   padding: 12px 20px;
   text-decoration: none;
@@ -118,4 +118,30 @@ html {
 
 .dashboard-button:hover {
   background-color: #d6c101;
+}
+
+.voice-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #ff2020;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.voice-button.active {
+  background-color: green;
+}
+
+
+
+#helpBtn {
+  background-color: #8d8d8d;
+  left: 120px;
+  bottom: 20px;
 }

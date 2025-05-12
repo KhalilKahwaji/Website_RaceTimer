@@ -22,8 +22,8 @@ h2 {
 }
 
 a {
-  text-decoration: none;       /* removes underline */
-  color: inherit;              /* keeps text color same as parent */
+  text-decoration: none;       
+  color: inherit;              
 }
 
 a:visited,

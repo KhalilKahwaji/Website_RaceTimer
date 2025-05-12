@@ -49,3 +49,4 @@ function formatLapResults(data) {
     }
     return result;
 }
+

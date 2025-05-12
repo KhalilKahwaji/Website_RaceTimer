@@ -208,3 +208,74 @@ function clearChildren(node) {
 let stopwatch = new Stopwatch(
     document.querySelector('.stopwatch'),
     document.querySelector('.results'));
+
+    document.getElementById("voiceBtn").addEventListener("click", () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert("Speech Recognition not supported in this browser.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    const voiceBtn = document.getElementById("voiceBtn");
+    voiceBtn.classList.add("active");
+
+    recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript.toLowerCase().trim();
+        console.log("Voice Command:", command);
+
+        // Map of commands to buttons or actions
+        const actionMap = {
+            "start": () => stopwatch.start(),
+            "lap": () => stopwatch.lap(),
+            "stop": () => stopwatch.stop(),
+            "restart": () => stopwatch.restart(),
+            "clear": () => stopwatch.clear(),
+            "send": () => stopwatch.handleLapsSubmission()
+        };
+
+        if (actionMap[command]) {
+            actionMap[command]();
+            flashButton(command);
+        } else {
+            alert("Unrecognized command: " + command);
+        }
+
+        voiceBtn.classList.remove("active");
+    };
+
+    recognition.onerror = (e) => {
+        console.error("Speech error:", e);
+        alert("Speech recognition failed.");
+        voiceBtn.classList.remove("active");
+    };
+});
+
+// Flash the matching button green
+function flashButton(action) {
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(btn => {
+        if (btn.textContent.trim().toLowerCase() === action) {
+            btn.style.backgroundColor = "green";
+            setTimeout(() => {
+                btn.style.backgroundColor = ""; // restore original
+            }, 800);
+        }
+    });
+}
+document.getElementById("helpBtn").addEventListener("click", () => {
+    alert(`🎤 Voice Commands You Can Say:
+    
+• "Start" – Start the timer
+• "Lap" – Record a lap
+• "Stop" – Stop the timer
+• "Restart" – Reset and start again
+• "Clear" – Clear all laps
+• "Send" – Submit laps to server or download CSV`);
+});

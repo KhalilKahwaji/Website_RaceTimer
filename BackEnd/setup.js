@@ -14,12 +14,12 @@ if (!fs.existsSync(dataDir)) {
 // 2. Delete old database if it exists
 if (fs.existsSync(dbPath)) {
   fs.unlinkSync(dbPath);
-  console.log('⚠️ Old database deleted');
+  console.log(' Old database deleted');
 }
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('❌ Failed to open DB:', err.message);
+    console.error(' Failed to open DB:', err.message);
     process.exit(1);
   }
 });
@@ -34,10 +34,10 @@ db.serialize(() => {
     )
   `, (err) => {
     if (err) {
-      console.error('❌ Error creating table:', err.message);
+      console.error(' Error creating table:', err.message);
       process.exit(1);
     } else {
-      console.log('✅ Database and table created successfully.');
+      console.log(' Database and table created successfully.');
     }
   });
 });
